@@ -1,6 +1,5 @@
 # m3u8-downloader
 
-[![Build Status](https://github.com/weaming/m3u8-downloader/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/weaming/m3u8-downloader/actions/workflows/build-and-test.yml)
 [![License](https://img.shields.io/github/license/weaming/m3u8-downloader.svg)](https://github.com/weaming/m3u8-downloader)
 [![Release](https://img.shields.io/github/release/weaming/m3u8-downloader.svg)](https://github.com/weaming/m3u8-downloader/releases)
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/weaming/m3u8-downloader)
