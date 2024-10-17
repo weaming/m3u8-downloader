@@ -1,6 +1,6 @@
-module github.com/cxjava/m3u8-downloader
+module github.com/weaming/m3u8-downloader
 
-go 1.21
+go 1.22
 
 require (
 	github.com/cheggaaa/pb/v3 v3.1.5

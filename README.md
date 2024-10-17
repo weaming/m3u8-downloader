@@ -1,9 +1,9 @@
 # m3u8-downloader
 
-[![Build Status](https://github.com/cxjava/m3u8-downloader/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/cxjava/m3u8-downloader/actions/workflows/build-and-test.yml)
-[![License](https://img.shields.io/github/license/cxjava/m3u8-downloader.svg)](https://github.com/cxjava/m3u8-downloader)
-[![Release](https://img.shields.io/github/release/cxjava/m3u8-downloader.svg)](https://github.com/cxjava/m3u8-downloader/releases)
-![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/cxjava/m3u8-downloader)
+[![Build Status](https://github.com/weaming/m3u8-downloader/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/weaming/m3u8-downloader/actions/workflows/build-and-test.yml)
+[![License](https://img.shields.io/github/license/weaming/m3u8-downloader.svg)](https://github.com/weaming/m3u8-downloader)
+[![Release](https://img.shields.io/github/release/weaming/m3u8-downloader.svg)](https://github.com/weaming/m3u8-downloader/releases)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/weaming/m3u8-downloader)
 
 README | [简体中文](README.zh-cn.md)
 
@@ -39,19 +39,19 @@ m3u8 downloader by Golang
 
 ```sh
 #install to /usr/local/bin
-curl https://i.jpillora.com/cxjava/m3u8-downloader! | bash
+curl https://i.jpillora.com/weaming/m3u8-downloader! | bash
 # or
-curl https://gobin.fly.dev/cxjava/m3u8-downloader! | bash
+curl https://gobin.fly.dev/weaming/m3u8-downloader! | bash
 ```
 
 ## Via [goblin.run](https://goblin.run)
 
 ```shell
 # binary will be /usr/local/bin/m3u8-downloader
-curl -sSfL https://goblin.run/github.com/cxjava/m3u8-downloader | sh
+curl -sSfL https://goblin.run/github.com/weaming/m3u8-downloader | sh
 
 # to put to a custom path
-curl -sSfL https://goblin.run/github.com/cxjava/m3u8-downloader | PREFIX=/tmp sh
+curl -sSfL https://goblin.run/github.com/weaming/m3u8-downloader | PREFIX=/tmp sh
 ```
 
 
@@ -141,7 +141,7 @@ Flags:
   -C, --cdn stringArray      CDN(s) for the download domain, eg. -C 'www.google.com:8.8.8.8' -C 'www.google.com:1.1.1.1' -C 'www.google.com:9.9.9.9' .
   -d, --deleteSyncByte       some TS files do not start with SyncByte 0x47, they can not be played after merging, need to remove the bytes before the SyncByte.
   -D, --deleteTS             delete all the downloaded TS file. (default true)
-  -f, --downloadDir string   download directory, base on current folder. (default "./outputFolder")
+  -f, --downloadDir string   download directory, base on current folder. (default "./output")
   -H, --header stringArray   custom http header(s), eg. -H 'user-agent: Mozilla/5.0...' -H 'accept: */*' .
   -h, --help                 help for download
       --key string           custom key to decrypt ts data.
@@ -150,6 +150,7 @@ Flags:
   -o, --output string        file name for save.
   -x, --proxy string         use proxy. eg. http://127.0.0.1:8080
   -n, --threadNumber int     the number of download thread. (default 10)
+  -L, --liveStream float     the url is a live stream, will loop to download until the duration is satisfied, unit is seconds
 
 Global Flags:
       --config string   config file (default is $HOME/.m3u8-downloader.yaml)

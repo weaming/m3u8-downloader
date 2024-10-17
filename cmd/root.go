@@ -18,6 +18,7 @@ var rootCmd = &cobra.Command{
 	Long: `A tool to help you download a m3u8 file and save it as a single TS file
 Features:
 
+* live stream, such as chaturbate.com
 * ping IPS
 * support multiple thread download
 * support CDN

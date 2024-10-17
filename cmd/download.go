@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/cxjava/m3u8-downloader/downloader"
 	"github.com/golang-module/carbon/v2"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/weaming/m3u8-downloader/downloader"
 )
 
 var (
@@ -25,6 +25,7 @@ var (
 	key            string
 	keyFormat      string
 	useFFmpeg      bool
+	liveStream     float64
 )
 
 // downloadCmd represents the download command
@@ -55,6 +56,7 @@ var downloadCmd = &cobra.Command{
 			Key:            key,
 			KeyFormat:      keyFormat,
 			UseFFmpeg:      useFFmpeg,
+			LiveStream:     liveStream,
 		}
 		downloader.SetOptions(options)
 		downloader.Download()
@@ -65,7 +67,7 @@ func init() {
 	rootCmd.AddCommand(downloadCmd)
 
 	downloadCmd.Flags().StringVarP(&output, "output", "o", "", "file name for save.")
-	downloadCmd.Flags().StringVarP(&downloadDir, "downloadDir", "f", "./outputFolder", "download directory, base on current folder.")
+	downloadCmd.Flags().StringVarP(&downloadDir, "downloadDir", "f", "./output", "download directory, base on current folder.")
 	downloadCmd.Flags().StringVarP(&baseUrl, "baseUrl", "u", "", "base url for m3u8.")
 	downloadCmd.Flags().StringVarP(&proxy, "proxy", "x", "", "use proxy. eg. http://127.0.0.1:8080")
 	downloadCmd.Flags().BoolVarP(&deleteSyncByte, "deleteSyncByte", "d", false, "some TS files do not start with SyncByte 0x47, they can not be played after merging, need to remove the bytes before the SyncByte.")
@@ -76,7 +78,8 @@ func init() {
 	downloadCmd.Flags().StringVarP(&logLevel, "logLevel", "l", "Info", "logging level on a Logger,logging levels: Trace, Debug, Info, Warning, Error, Fatal and Panic.")
 	downloadCmd.Flags().StringVarP(&key, "key", "", "", "custom key to decrypt ts data.")
 	downloadCmd.Flags().StringVarP(&keyFormat, "keyFormat", "", "original", "format of key, format can be those values: original, hex, base64.")
-	downloadCmd.Flags().BoolVarP(&useFFmpeg, "UseFFmpeg", "", false, "use FFmpeg for merging TS files.")
+	downloadCmd.Flags().BoolVarP(&useFFmpeg, "useFFmpeg", "", false, "use FFmpeg for merging TS files.")
+	downloadCmd.Flags().Float64VarP(&liveStream, "liveStream", "L", 0, "live stream duration in seconds")
 
 	// Here you will define your flags and configuration settings.
 

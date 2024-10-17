@@ -1,9 +1,9 @@
 # m3u8-downloader
 
-[![构建状态](https://github.com/cxjava/m3u8-downloader/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/cxjava/m3u8-downloader/actions/workflows/build-and-test.yml)
-[![img](https://img.shields.io/github/license/cxjava/m3u8-downloader?label=%E8%AE%B8%E5%8F%AF%E8%AF%81)](https://github.com/cxjava/m3u8-downloader)
-[![img](https://img.shields.io/github/release/cxjava/m3u8-downloader?label=%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)](https://github.com/cxjava/m3u8-downloader/releases)
-![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/cxjava/m3u8-downloader)
+[![构建状态](https://github.com/weaming/m3u8-downloader/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/weaming/m3u8-downloader/actions/workflows/build-and-test.yml)
+[![img](https://img.shields.io/github/license/weaming/m3u8-downloader?label=%E8%AE%B8%E5%8F%AF%E8%AF%81)](https://github.com/weaming/m3u8-downloader)
+[![img](https://img.shields.io/github/release/weaming/m3u8-downloader?label=%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)](https://github.com/weaming/m3u8-downloader/releases)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/weaming/m3u8-downloader)
 
 [README](README.md) | 简体中文
 
@@ -38,19 +38,19 @@ Golang版本的M3U8下载器
 
 ```sh
 # 默认安装到 /usr/local/bin
-curl https://i.jpillora.com/cxjava/m3u8-downloader! | bash
+curl https://i.jpillora.com/weaming/m3u8-downloader! | bash
 # 或者
-curl https://gobin.fly.dev/cxjava/m3u8-downloader! | bash
+curl https://gobin.fly.dev/weaming/m3u8-downloader! | bash
 ```
 
 ## 通过 [goblin.run](https://goblin.run) 安装
 
 ```shell
 # 默认安装到 /usr/local/bin/
-curl -sSfL https://goblin.run/github.com/cxjava/m3u8-downloader | sh
+curl -sSfL https://goblin.run/github.com/weaming/m3u8-downloader | sh
 
 # 自定义路径为 /tmp
-curl -sSfL https://goblin.run/github.com/cxjava/m3u8-downloader | PREFIX=/tmp sh
+curl -sSfL https://goblin.run/github.com/weaming/m3u8-downloader | PREFIX=/tmp sh
 ```
 
 
@@ -139,7 +139,7 @@ Flags:
   -C, --cdn stringArray      CDN(s) for the download domain, eg. -C 'www.google.com:8.8.8.8' -C 'www.google.com:1.1.1.1' -C 'www.google.com:9.9.9.9' .
   -d, --deleteSyncByte       some TS files do not start with SyncByte 0x47, they can not be played after merging, need to remove the bytes before the SyncByte.
   -D, --deleteTS             delete all the downloaded TS file. (default true)
-  -f, --downloadDir string   download directory, base on current folder. (default "./outputFolder")
+  -f, --downloadDir string   download directory, base on current folder. (default "./output")
   -H, --header stringArray   custom http header(s), eg. -H 'user-agent: Mozilla/5.0...' -H 'accept: */*' .
   -h, --help                 help for download
       --key string           custom key to decrypt ts data.
@@ -160,7 +160,7 @@ Global Flags:
   -C, --cdn stringArray      CDN参数，例子如： -C 'www.google.com:8.8.8.8' -C 'www.google.com:1.1.1.1' -C 'www.google.com:9.9.9.9' .
   -d, --deleteSyncByte       TS二包头，参见： https://en.wikipedia.org/wiki/MPEG_transport_stream .
   -D, --deleteTS             删除下载的TS文件，默认是true
-  -f, --downloadDir string   下载的目录. (默认是 "./outputFolder")
+  -f, --downloadDir string   下载的目录. (默认是 "./output")
   -H, --header stringArray   自定义请求头，参数兼容curl命令的参数，可以用chrome开发者工具，复制为cUrl命令。例如： -H 'user-agent: Mozilla/5.0...' -H 'accept: */*' .
   -h, --help                 帮助命令
       --key string           自定义解密的key.
@@ -169,6 +169,7 @@ Global Flags:
   -o, --output string        下载之后的文件名称，建议设置为ts结尾.
   -x, --proxy string         设置代理下载. 比如：http://127.0.0.1:8080
   -n, --threadNumber int     下载请求的线程数量. (默认 10)
+  -L, --liveStream float     链接是一个直播，将循环下载直到满足时长，单位秒
 ```
 
 ### 快速从chrome中复制下载信息

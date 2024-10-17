@@ -4,9 +4,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/cxjava/m3u8-downloader/ping"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/weaming/m3u8-downloader/ping"
 )
 
 var (
