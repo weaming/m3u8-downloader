@@ -1,4 +1,4 @@
-module github.com/cxjava/m3u8-downloader
+module github.com/weaming/m3u8-downloader
 
 go 1.23.0
 

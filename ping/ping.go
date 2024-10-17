@@ -48,19 +48,19 @@ func PingAndPrint(pingRecords []PingRecord, outputType string) {
 	var total = int(len(pingRecords))
 	bar := pb.Full.Start(total)
 
-	pingedRecords := []PingRecord{}
-	for _, pingRecord := range pingRecords {
+	pingedRecords := make([]PingRecord, len(pingRecords))
+	for i, pingRecord := range pingRecords {
 		wg.Add(1)
 		threadLimiter <- struct{}{}
-		go func(pingRecord PingRecord) {
+		go func(index int, record PingRecord) {
 			defer func() {
 				bar.Increment()
 				wg.Done()
 				<-threadLimiter
-				log.Trace("Finished ping " + pingRecord.IPAddress)
+				log.Trace("Finished ping " + record.IPAddress)
 			}()
-			pingedRecords = append(pingedRecords, pingIP(pingRecord))
-		}(pingRecord)
+			pingedRecords[index] = pingIP(record)
+		}(i, pingRecord)
 	}
 	wg.Wait()
 	bar.Finish()

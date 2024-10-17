@@ -24,6 +24,10 @@ func parseCDN(cdns []string) map[string]CDNS {
 
 	for _, v := range cdns {
 		dp := strings.Split(v, ":")
+		if len(dp) < 2 {
+			log.Warnf("Invalid CDN format: %s, expected format 'domain:ip'", v)
+			continue
+		}
 		domain := dp[0]
 		ip := dp[1]
 		if cdns, ok := fastestCDN[domain]; ok {

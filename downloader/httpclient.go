@@ -77,6 +77,10 @@ func initHttpClient(proxy string, headers []string) {
 		log.Info("Set customization header")
 		for _, header := range headers {
 			h := strings.SplitN(header, ":", 2)
+			if len(h) < 2 {
+				log.Warnf("Invalid header format: %s, expected format 'key: value'", header)
+				continue
+			}
 			log.Debug("customization header =>" + h[0] + ":" + h[1])
 			client.SetHeader(h[0], strings.TrimSpace(h[1]))
 		}

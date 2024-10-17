@@ -41,7 +41,7 @@ func ExecWinShell(s string) error {
 	return nil
 }
 
-//windows合并文件
+// windows合并文件
 func WinMergeFile(path string, del bool) string {
 	err := os.Chdir(path)
 	check(err)
@@ -56,7 +56,7 @@ func WinMergeFile(path string, del bool) string {
 	return "merged.tmp"
 }
 
-//unix合并文件
+// unix合并文件
 func UnixMergeFile(path string, del bool) string {
 	err := os.Chdir(path)
 	check(err)
@@ -66,7 +66,7 @@ func UnixMergeFile(path string, del bool) string {
 	check(err)
 	if del {
 		log.Warn("Delete all ts files")
-		err = ExecUnixShell("rm -rf *.ts")
+		err = ExecUnixShell("rm -f *.ts")
 		check(err)
 	}
 	return "merged.tmp"
@@ -97,7 +97,7 @@ func FFmpegMergeFile(path string, del bool) string {
 			check(err)
 		}
 	default:
-		err = ExecWinShell("ffmpeg -L")
+		err = ExecUnixShell("ffmpeg -L")
 		if err != nil {
 			// fallback to copy
 			log.Warn("Check ffmpeg failed, fallback to merge by copy")
@@ -110,7 +110,7 @@ func FFmpegMergeFile(path string, del bool) string {
 		check(err)
 		if del {
 			log.Warn("Delete templist and all ts files")
-			err = ExecUnixShell("rm -f templist.txt && rm -rf *.ts")
+			err = ExecUnixShell("rm -f templist.txt && rm -f *.ts")
 			check(err)
 		}
 	}
