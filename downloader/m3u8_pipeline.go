@@ -125,6 +125,10 @@ DONE:
 
 	tempName := mergeFile()
 	renameFile(tempName)
+
+	if convertToMov {
+		convertToMovFile()
+	}
 }
 
 func fetchSegments(

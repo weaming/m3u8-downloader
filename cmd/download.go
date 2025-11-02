@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"fmt"
@@ -26,6 +26,7 @@ var (
 	keyFormat      string
 	useFFmpeg      bool
 	liveStream     float64
+	convertToMov   bool
 )
 
 // downloadCmd represents the download command
@@ -57,6 +58,7 @@ var downloadCmd = &cobra.Command{
 			KeyFormat:      keyFormat,
 			UseFFmpeg:      useFFmpeg,
 			LiveStream:     liveStream,
+			ConvertToMov:   convertToMov,
 		}
 		downloader.SetOptions(options)
 		downloader.Download()
@@ -80,6 +82,7 @@ func init() {
 	downloadCmd.Flags().StringVarP(&keyFormat, "keyFormat", "", "original", "format of key, format can be those values: original, hex, base64.")
 	downloadCmd.Flags().BoolVarP(&useFFmpeg, "useFFmpeg", "", false, "use FFmpeg for merging TS files.")
 	downloadCmd.Flags().Float64VarP(&liveStream, "liveStream", "L", 0, "live stream duration in seconds")
+	downloadCmd.Flags().BoolVarP(&convertToMov, "mov", "", true, "convert merged TS file to MOV format using FFmpeg")
 
 	// Here you will define your flags and configuration settings.
 

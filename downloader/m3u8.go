@@ -45,6 +45,7 @@ var (
 	keyFormat      string
 	useFFmpeg      bool
 	liveStream     float64
+	convertToMov   bool
 )
 
 // Options defines common m3u8 options.
@@ -63,6 +64,7 @@ type Options struct {
 	KeyFormat      string
 	UseFFmpeg      bool
 	LiveStream     float64
+	ConvertToMov   bool
 }
 
 // SetOptions sets the common request option.
@@ -81,6 +83,7 @@ func SetOptions(opt Options) {
 	keyFormat = opt.KeyFormat
 	useFFmpeg = opt.UseFFmpeg
 	liveStream = opt.LiveStream
+	convertToMov = opt.ConvertToMov
 }
 
 func ResolveDir(dirStr string) string {
@@ -291,6 +294,10 @@ func Download() {
 
 	temp_name := mergeFile()
 	renameFile(temp_name)
+
+	if convertToMov {
+		convertToMovFile()
+	}
 }
 
 func renameFile(temp_file string) {
@@ -304,6 +311,35 @@ func renameFile(temp_file string) {
 		err = os.RemoveAll(outputPath)
 		if err != nil {
 			log.Println(err)
+		}
+	}
+}
+
+func convertToMovFile() {
+	inputPath := filepath.Join(downloadDir, output)
+	outputExt := filepath.Ext(output)
+	outputBase := output[:len(output)-len(outputExt)]
+	movOutput := outputBase + ".mov"
+	movPath := filepath.Join(downloadDir, movOutput)
+
+	log.Infof("Converting %s to MOV format...", output)
+
+	cmd := fmt.Sprintf("ffmpeg -i \"%s\" -c:v copy -c:a copy \"%s\"", inputPath, movPath)
+	err := utils.ExecUnixShell(cmd)
+
+	if err != nil {
+		log.Errorf("Failed to convert to MOV: %v", err)
+		log.Errorf("Command: %s", cmd)
+		return
+	}
+
+	log.Infof("✓ Successfully converted to: %s", movOutput)
+
+	if deleteTS {
+		log.Debugf("Removing original TS file: %s", inputPath)
+		err = os.Remove(inputPath)
+		if err != nil {
+			log.Warnf("Failed to remove original TS file: %v", err)
 		}
 	}
 }
